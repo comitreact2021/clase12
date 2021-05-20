@@ -33,10 +33,14 @@ function cargarTarjetas() {
 
 cargarTarjetas();
 
-function buscarPorNombre(nombreBuscado) {
+function limpiarListadoProductos() {
   const productosContainer = document.getElementById('productos-container');
 
   productosContainer.innerHTML = ''; //Borrar el listado de productos
+}
+
+function buscarPorNombre(nombreBuscado) {
+  limpiarListadoProductos();
 
   for (producto of productos) {
     const productoEnMinusuculas = producto.nombre.toLowerCase(); //samsung
@@ -48,17 +52,15 @@ function buscarPorNombre(nombreBuscado) {
   }
 }
 
-const btnBuscar = document.getElementById('btn-buscar');
-btnBuscar.addEventListener('click', (event) => {
-  event.preventDefault();
+const txtBuscar = document.getElementById('txt-buscar');
 
-  const txtBuscar = document.getElementById('txt-buscar');
+txtBuscar.addEventListener('keyup', (event) => {
   const textoBuscado = txtBuscar.value;
 
   //if (textoBuscado.trim() != '') {
   if (textoBuscado.trim().length > 0) {
     buscarPorNombre(textoBuscado);
   } else {
-    alert('Debe ingresar un texto a buscar');
+    limpiarListadoProductos();
   }
 });
