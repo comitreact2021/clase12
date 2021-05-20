@@ -1,8 +1,8 @@
-function agregarTarjeta({ imagen, nombre, precio }) {
+function agregarTarjeta({ id, imagen, nombre, precio }) {
   //const { imagen, nombre, precio } = producto;
 
-  const card = `<div class="col mb-4 mt-4">
-                      <a class="card-link" href="http://www.google.com.ar">
+  const card = `<div data-id="${id}" class="col-card col mb-4 mt-4">
+                      <a class="card-link" href="#">
                           <div class="card h-100">
                           <img src="images/${imagen}" class="card-img-top" alt="Producto 1" />
   
@@ -25,10 +25,29 @@ function agregarTarjeta({ imagen, nombre, precio }) {
   const productosContainer = document.getElementById('productos-container');
 
   productosContainer.innerHTML += card;
+
+  /*const tarjetaAgregada = document.getElementById(`card-${id}`);
+
+  tarjetaAgregada.addEventListener('click', (event) => {
+    event.preventDefault();
+    console.log('Click en el producto');
+  });*/
+
+  $('.col-card').click(function (event) {
+    event.preventDefault();
+
+    const id = $(this).attr('data-id');
+
+    console.log('Click producto ' + id);
+  });
 }
 
 function cargarTarjetas() {
   productos.forEach(agregarTarjeta);
+
+  /*for (let i = 0; i < 2; i++) {
+    agregarTarjeta(productos[i]);
+  }*/
 }
 
 cargarTarjetas();
